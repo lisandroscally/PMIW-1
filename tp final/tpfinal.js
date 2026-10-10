@@ -1,282 +1,223 @@
-// PONER CREDITOS
+// imagenes
+let imgFacultad, imgMarcha, imgCentro, imgPelicula, imgCarteles, imgAula, imgCuarto, imgCalle, imgcreditosfondo;
+let imgPersonajePeloLargo, imgPersonajeBarba;
 
-
-// Imagenes:
-let imgFacultad;
-let imgMarcha;
-let imgCentro;
-let imgPelicula;
-let imgCarteles;
-let imgAula;
-let imgCuarto;
-let imgCalle;
-
-
-// Control
-let escenaActual= 1;
-
-// Condicionales para mostrar Botones
-let OpcionA;
-let OpcionB;
-// Posicion de los Botones
-let PosA = 100;
-let PosB = 500;
-let Altura = 350;
-// Ancho de los Botones
-let Ancho = 200;
-let Alto = 75;
-// Diccionario
-let escenas;
-
+// control
+let escenaActual = 1;
 let tuvoClases = false;
 
-// Audio
+// botones
+let OpcionA = false;
+let OpcionB = false;
+const PosA = 100;
+const PosB = 500;
+const Altura = 350;
+const Ancho = 200;
+const Alto = 75;
+
+// diccionario de escenas
+let escenas;
+
+// audio
 let musica;
 let estaReproduciendo = false;
 
-// Preload
 function preload() {
-  // Cargo las imagenes
-  imgFacultad=loadImage('data/Facultad.png');
-  imgMarcha=loadImage('data/Marcha.png');
-  imgCentro=loadImage('data/Centro.png');
-  imgPelicula=loadImage('data/Pelicula.png');
-  imgCarteles=loadImage('data/Carteles.png');
-  imgAula=loadImage('data/Aula.png');
-  imgCalle=loadImage('data/Calle.jpeg');
-  imgCuarto=loadImage('data/Cuarto.jpeg');
+  imgFacultad = loadImage("./data/Facultad.png");
+  imgMarcha   = loadImage("./data/Marcha.png");
+  imgCentro   = loadImage("./data/Centro.png");
+  imgPelicula = loadImage("./data/Pelicula.png");
+  imgCarteles = loadImage("./data/Carteles.png");
+  imgAula     = loadImage("./data/Aula.png");
+  imgCalle    = loadImage("./data/Calle.jpeg");
+  imgCuarto   = loadImage("./data/Cuarto.jpeg");
+  imgcreditosfondo = loadImage("./data/fondonegro.jpeg");
 
-  // Cargo el audio
-  musica = loadSound('data/audios/musica_fondo.mp3');
+  // sprites paracreditos
+  imgLisandroScally= loadImage("./data/Personajeconpelolargo.jpeg");
+  imgManuelVasquez     = loadImage("./data/Personajeconbarba.jpeg");
+
+  musica = loadSound("./data/audios/musica_fondo.mp3");
 }
 
-// Setup
 function setup() {
   createCanvas(800, 450);
   escenas = {
-  "1":
-  {
-  "fondo" :
-    imgFacultad,
-    "texto":
-    "clickea para empezar",
-    "OpcionA":
-    2
-  }
-  ,
-  "2":
-  {
-  "fondo" :
-    imgFacultad,
-    "texto":
-    "Estas esperando a cursar y te invitan a marchar",
-    "OpcionA":
-    3,
-    "TextoA":
-    "Conocer más",
-    "OpcionB":
-    10,
-    "TextoB":
-    "Ignorarlo"
-  }
-  ,
-  "3":
-  {
-  "fondo" :
-    imgCentro,
-    "texto":
-    "Vas al centro de estudiantes a conocer más",
-    "OpcionA":
-    4,
-    "TextoA":
-    "Hablar",
-  }
-  ,
-  "4":
-  {
-  "fondo" :
-    imgCentro,
-    "texto":
-    "Conoces mas info sobre el 16/9",
-    "OpcionA":
-    5,
-    "TextoA":
-    "Marchar",
-    "OpcionB":
-    6,
-    "TextoB":
-    "Ayudar"
-  }
-  ,
-  "5":
-  {
-  "fondo" :
-    imgMarcha,
-    "texto":
-    "Vas a marchar",
-    "OpcionA":
-    1,
-    "TextoA":
-    "Inicio"
-  }
-  ,
-  "6":
-  {
-  "fondo" :
-    imgCarteles,
-    "texto":
-    "Ayudas a hacer carteles",
-    "OpcionA":
-    7,
-    "TextoA":
-    "Volver a casa"
-  }
-  ,
-  "7":
-  {
-  "fondo" :
-    imgCuarto,
-    "texto":
-    "Volves a tu casa contento",
-    "OpcionA":
-    8,
-    "TextoA":
-    "Invitar a amigos"
-  }
-  ,
-  "8":
-  {
-  "fondo" :
-    imgCuarto,
-    "texto":
-    "¿Que van a hacer con tus amigos?",
-    "OpcionA":
-    5,
-    "TextoA":
-    "Marchar",
-    "OpcionB":
-    9,
-    "TextoB":
-    "mirar pelicula"
-  }
-  ,
-  "9":
-  {
-  "fondo" :
-    imgPelicula,
-    "texto":
-    "Ves una pelicula con tus amigos",
-    "OpcionA":
-    1,
-    "TextoA":
-    "Inicio"
-  }
-  ,
-  "10":
-  {
-  "fondo" :
-    imgAula,
-    "texto":
-    "Se habla de una pelicula",
-    "OpcionA":
-    7,
-    "TextoA":
-    "Volver a casa"
-  }
-  ,
-  "11":
-  {
-  "fondo" :
-    imgMarcha,
-    "texto":
-    "Vas a marchar"
-  }
-};
+    1: {
+      fondo: imgFacultad,
+      texto: "Clickea para empezar",
+      TextoA: "Empezar",
+      OpcionA: 2,
+      TextoB: "Creditos",
+      OpcionB: 11
+    },
+    2: {
+      fondo: imgFacultad,
+      texto: "Estas esperando a cursar y te invitan a marchar",
+      TextoA: "Conocer mas",
+      OpcionA: 3,
+      TextoB: "Ignorarlo",
+      OpcionB: 10
+    },
+    3: {
+      fondo: imgCentro,
+      texto: "Vas al centro de estudiantes a conocer mas",
+      TextoA: "Hablar",
+      OpcionA: 4
+    },
+    4: {
+      fondo: imgCentro,
+      texto: "Conoces mas info sobre el 16/9",
+      TextoA: "Marchar",
+      OpcionA: 5,
+      TextoB: "Ayudar",
+      OpcionB: 6
+    },
+    5: {
+      fondo: imgMarcha,
+      texto: "Vas a marchar",
+      TextoA: "Inicio",
+      OpcionA: 1
+    },
+    6: {
+      fondo: imgCarteles,
+      texto: "Ayudas a hacer carteles",
+      TextoA: "Volver a casa",
+      OpcionA: 7
+    },
+    7: {
+      fondo: imgCuarto,
+      texto: "Volves a tu casa contento",
+      TextoA: "Invitar a amigos",
+      OpcionA: 8
+    },
+    8: {
+      fondo: imgCuarto,
+      texto: "¿Que van a hacer con tus amigos?",
+      TextoA: "Marchar",
+      OpcionA: 5,
+      TextoB: "Mirar pelicula",
+      OpcionB: 9
+    },
+    9: {
+      fondo: imgPelicula,
+      texto: "Ves una pelicula con tus amigos",
+      TextoA: "Inicio",
+      OpcionA: 1
+    },
+    10: {
+      fondo: imgAula,
+      texto: "Se habla de una pelicula",
+      TextoA: "Volver a casa",
+      OpcionA: 7
+    },
+    11: {
+      fondo: imgcreditosfondo,
+      texto: "Creado por",
+      TextoA: "Volver",
+      OpcionA: 1
+    }
+  };
 }
 
-
 function draw() {
-  // Fondo
   background(200);
-  // Cargo Escena
   cargarEscena();
 }
 
 function cargarEscena() {
-  // Variable para tener la escena actual
   let nodo = escenas[escenaActual];
-  // Muestro la imagen
+  if (!nodo) return;
+
   image(nodo.fondo, 0, 0, width, height);
-  // Cargar texto
-  push();
-  textAlign(CENTER, CENTER);
-  textSize(32);
-  fill(255);
-  stroke(0);
-  text(nodo.texto, width/2, height/2);
-  pop();
-  if (escenaActual != 1 && !tuvoClases) {
-    // Me fijo si tiene Opcion A
-    if (nodo.OpcionA) {
-      OpcionA = true;
-      cargarBotonA(nodo);
-    } else {
-      OpcionA = false;
-    }
-    // Me fijo si tiene Opcion B
-    if (nodo.OpcionB) {
-      OpcionB = true;
-      cargarBotonB(nodo);
-    } else {
-      OpcionB = false;
-    }
-  } 
+
+  // ===== PANTALLA DE CRÉDITOS =====
+  if (escenaActual === 11) {
+    // Personajes
+    image(imgLisandroScally, 80, 90, 140, 200);
+    image(imgManuelVasquez, 580, 90, 140, 200);     
+
+    push();
+    textAlign(CENTER, CENTER);
+    fill(255);
+    stroke(0);
+    strokeWeight(3);
+
+    // Título centrado
+    textSize(28);
+    text(nodo.texto, width / 2, 60);
+    
+    textSize(20);
+    text("Lisandro Scally", 150, 310);
+    text ("Y", 400, 200);
+    text("Manuel Vasquez", 650, 310);
+    pop();
+
+  } else {
+    push();
+    textAlign(CENTER, CENTER);
+    textSize(28);
+    fill(255);
+    stroke(0);
+    text(nodo.texto, width / 2, height / 2 - 40);
+    pop();
+  }
+
+  // botones
+  OpcionA = false;
+  OpcionB = false;
+
+  if (nodo.OpcionA !== undefined) {
+    OpcionA = true;
+    dibujarBoton(PosA, nodo.TextoA);
+  }
+  if (nodo.OpcionB !== undefined) {
+    OpcionB = true;
+    dibujarBoton(PosB, nodo.TextoB);
+  }
 }
 
-function cargarBotonA(nodo) {
+function dibujarBoton(x, texto) {
   push();
-  textAlign(CENTER, CENTER);
   fill(255);
-  rect(PosA, Altura, Ancho, Alto);
+  stroke(0);
+  strokeWeight(2);
+  rect(x, Altura, Ancho, Alto, 8);
   fill(0);
-  stroke(0);
-  textSize(32);
-  text(nodo.TextoA, PosA+Ancho/2, Altura + Alto/2);
-  pop();
-}
-
-function cargarBotonB(nodo) {
-  push();
+  noStroke();
   textAlign(CENTER, CENTER);
-  fill(255);
-  rect(PosB, Altura, Ancho, Alto);
-  fill(0);
-  stroke(0);
-  textSize(32);
-  text(nodo.TextoB, PosB+Ancho/2, Altura + Alto/2);
+  textSize(22);
+  text(texto, x + Ancho / 2, Altura + Alto / 2);
   pop();
 }
-
 
 function mousePressed() {
   let nodo = escenas[escenaActual];
-  // Pregunto si la posición del Mouse esta en alguno de los botones
-  if ((mouseX > PosA && mouseX < PosA+Ancho) && (mouseY > Altura && mouseY < Altura + Alto) && (OpcionA)) {
-    if (nodo.OpcionA === 1) {
-      escenaActual = 1;
-    } else {
-      escenaActual = nodo.OpcionA;
+  if (!nodo) return;
+
+  // boton A
+  if (OpcionA &&
+      mouseX > PosA && mouseX < PosA + Ancho &&
+      mouseY > Altura && mouseY < Altura + Alto) {
+
+    // iniciar musica solo al empezar el juego
+    if (escenaActual === 1 && nodo.OpcionA === 2) {
+      if (musica && !estaReproduciendo) {
+        try {
+          musica.loop();
+          estaReproduciendo = true;
+        } catch (e) {
+        }
+      }
     }
-  }
-  if ((mouseX > PosB && mouseX < PosB+Ancho) && (mouseY > Altura && mouseY < Altura + Alto) && (OpcionB)) {
-    escenaActual = nodo.OpcionB;
+
+    escenaActual = nodo.OpcionA;
   }
 
-  if (escenaActual === 1) {
-    if (!estaReproduciendo) {
-      musica.loop();
-      estaReproduciendo = true;
-    }
-    escenaActual = nodo.OpcionA;
+  // boton B
+  if (OpcionB &&
+      mouseX > PosB && mouseX < PosB + Ancho &&
+      mouseY > Altura && mouseY < Altura + Alto) {
+    escenaActual = nodo.OpcionB;
   }
 }
