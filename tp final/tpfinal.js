@@ -37,17 +37,17 @@ let estaReproduciendo = false;
 // Preload
 function preload() {
   // Cargo las imagenes
-  imgFacultad=loadImage('data/Facultad.png');
-  imgMarcha=loadImage('data/Marcha.png');
-  imgCentro=loadImage('data/Centro.png');
-  imgPelicula=loadImage('data/Pelicula.png');
-  imgCarteles=loadImage('data/Carteles.png');
-  imgAula=loadImage('data/Aula.png');
-  imgCalle=loadImage('data/Calle.jpeg');
-  imgCuarto=loadImage('data/Cuarto.jpeg');
+  imgFacultad=loadImage("./data/Facultad.png");
+  imgMarcha=loadImage("./data/Marcha.png");
+  imgCentro=loadImage("./data/Centro.png");
+  imgPelicula=loadImage("./data/Pelicula.png");
+  imgCarteles=loadImage("./data/Carteles.png");
+  imgAula=loadImage("./data/Aula.png");
+  imgCalle=loadImage("./data/Calle.jpeg";
+  imgCuarto=loadImage("./data/Cuarto.jpeg");
 
   // Cargo el audio
-  musica = loadSound('data/audios/musica_fondo.mp3');
+  musica = loadSound("./data/audios/musica_fondo.mp3");
 }
 
 // Setup
